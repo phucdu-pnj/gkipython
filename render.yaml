@@ -1,0 +1,6 @@
+services:
+- type: web
+  name: gkipython-app
+  env: python
+  buildCommand: "pip install -r requirement.txt"
+  startCommand: "gunicorn main:app"

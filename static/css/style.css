@@ -1,0 +1,55 @@
+:root{
+    --bg-main: #121212;
+    --bg-card: #1e1e1e;
+    --border: #333333;
+    --text: #e0e0e0;
+}
+
+body{
+    background: var(--bg-main);
+    color: var(--text);
+    font-family: 'SegoeUI', system-ui, sans-serif;
+    padding-bottom: 50px;
+}
+
+.header-title{
+    color: #4da6ff;
+    font-weight: 700;
+    margin: 20px 0 25px;
+}
+
+.card-custom{
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 12px rgbs(0,0,0,0.5);
+}
+
+.vide0-box{
+    background-color: #000;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+}
+
+.video-box img{
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.table {color: var(--text) !important; } 
+table-striped > tbody > tr:nth-of-type(odd) > * {
+    background: #2a2a2a !important;
+    color: #fff !important;
+}
+.table-bordered th, .table-bordered td { border-color: #444 !important; }
+
+.badge-ceil { background: purple; color: white;}
+.badge-floor { background: #1e90ff; color: white;}
+.badge-ref { background: #ffd700; color: black;}
+.badge-up { background: #00ff00; color: black;}
+.badge-down { background: #ff3333; color: white;}
