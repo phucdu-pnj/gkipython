@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -5,8 +7,9 @@ import matplotlib.animation as animation
 import matplotlib.ticker as ticker
 
 # 1. Đọc và chuẩn bị dữ liệu
-file_name = r'D:\gkipython\abc-28.csv'
-df = pd.read_csv('abc-28.csv.0', header=None)
+base_dir = Path(__file__).resolve().parent
+file_name = base_dir / 'abc-28.csv'
+df = pd.read_csv(file_name, header=None)
 if df.shape != (365, 7):
     raise ValueError(f"Dữ liệu phải có 365 dòng và 7 cột; hiện có {df.shape[0]} dòng, {df.shape[1]} cột.")
 df = df.apply(pd.to_numeric, errors='raise')
