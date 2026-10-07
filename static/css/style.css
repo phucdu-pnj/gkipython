@@ -1,39 +1,212 @@
+/* --- BIẾN MÀU SẮC (MODERN FINTECH DARK THEME) --- */
 :root {
- --bg: #f3f7fb;
- --ink: #172033;
- --primary: #0b5cad;
- --card: #ffffff;
- --radius: 18px;
+  --bg-color: #0b1121;         /* Nền xanh đen sâu (Deep Navy) */
+  --card-bg: #151e32;          /* Nền thẻ sáng hơn nền một chút */
+  --text-main: #f8fafc;        /* Chữ trắng ngà, chống mỏi mắt */
+  --text-muted: #94a3b8;       /* Chữ xám nhạt cho phụ đề */
+  --primary: #6366f1;          /* Tím Indigo công nghệ */
+  --accent: #10b981;           /* Xanh lục bảo (Bullish Green - màu tăng giá) */
+  --border-color: #2a364d;     /* Viền thẻ mảnh mờ */
+  --radius: 20px;
+  --warning-bg: rgba(245, 158, 11, 0.1);
+  --warning-text: #fbbf24;
+  --warning-border: rgba(245, 158, 11, 0.3);
 }
-* { box-sizing: border-box; }
-body {
+
+* { 
+  box-sizing: border-box; 
   margin: 0;
-  font-family: system-ui, -apple-system,"Segoe UI", sans-serif;
-  color: var(--ink);
-  background: var(--bg);
-  line-height: 1.6;
+  padding: 0;
 }
-.container { width: min(1120px, 92%); margin-inline: auto; }
-.hero { padding: 3.5rem 0 2.5rem; color: white;
-        background: linear-gradient(135deg, #083b70, #0b79d0); }
-.hero h1 { margin: .25rem 0; font-size: clamp(2rem, 6vw, 4rem); }
-.eyebrow { font-weight: 800; letter-spacing: .12em; }
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container { 
+  width: min(1200px, 92%); 
+  margin-inline: auto; 
+}
+
+/* --- HERO SECTION (PHONG CÁCH TƯƠNG LAI) --- */
+.hero { 
+  position: relative;
+  padding: 5rem 0 6rem;
+  text-align: center;
+  background: radial-gradient(circle at top center, #1e2b4d 0%, var(--bg-color) 70%);
+  margin-bottom: -60px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.hero h1 { 
+  margin: 1rem 0; 
+  font-size: clamp(2.2rem, 6vw, 3.8rem); 
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  /* Hiệu ứng chữ Gradient */
+  background: linear-gradient(to right, #818cf8, #34d399);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero .subtitle { 
+  font-size: 1.15rem; 
+  color: var(--text-muted); 
+  max-width: 680px; 
+  margin: 0 auto; 
+  font-weight: 400;
+}
+
+/* Tag phát sáng (Glassmorphism) */
+.hero .eyebrow { 
+  font-weight: 700; 
+  letter-spacing: 0.15em; 
+  font-size: 0.75rem;
+  background: rgba(99, 102, 241, 0.15);
+  color: #818cf8;
+  padding: 6px 16px;
+  border-radius: 30px;
+  display: inline-block;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
+}
+
+/* --- BỐ CỤC LƯỚI --- */
 .grid {
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(240px, 1fr);
-  gap: 1.25rem;
-  padding-block: 1.5rem 3rem;
+  grid-template-columns: minmax(0, 2.2fr) minmax(320px, 1fr);
+  gap: 1.75rem;
+  padding-block: 1.5rem 5rem;
   align-items: start;
+  position: relative;
+  z-index: 10;
 }
+
+/* --- THẺ NỘI DUNG (CARD) --- */
 .card {
-  background: var(--card);
+  background: var(--card-bg);
   border-radius: var(--radius);
-  padding: 1.25rem;
-  box-shadow: 0 12px 35px rgba(15, 42, 70, .10);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  backdrop-filter: blur(10px);
 }
-video { display: block; width: 100%; height: auto;
-        border-radius: 12px; background: #000; }
-@media (max-width: 760px) {
-  .grid { grid-template-columns: 1fr; }
-  .hero { padding-top: 2.5rem; }
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(99, 102, 241, 0.5);
+}
+
+.card-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.card-header h2 { 
+  margin: 0; 
+  font-size: 1.25rem; 
+  font-weight: 600;
+  color: #e2e8f0; 
+  display: flex; 
+  align-items: center; 
+  gap: 12px; 
+}
+
+/* Icon chuyển màu Primary */
+.card-header h2 svg {
+  color: var(--primary);
+  filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.5));
+}
+
+.card-body { 
+  padding: 1.5rem; 
+}
+
+/* --- VIDEO & CẢNH BÁO LỖI --- */
+video { 
+  display: block; 
+  width: 100%; 
+  height: auto;
+  border-radius: 12px; 
+  background: #000; 
+  border: 1px solid var(--border-color);
+}
+
+.alert-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 1.5rem;
+  border-radius: 14px;
+  background: var(--warning-bg);
+  color: var(--warning-text);
+  border: 1px solid var(--warning-border);
+}
+
+.alert-warning p { margin: 6px 0 0; font-size: 0.95rem; color: rgba(251, 191, 36, 0.8); }
+.alert-warning strong { font-size: 1.1rem; }
+
+/* --- DANH SÁCH PHÂN TÍCH (NEON ACCENTS) --- */
+.custom-list { 
+  list-style: none; 
+  padding: 0;
+}
+
+.custom-list li {
+  padding: 1.25rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+  padding-left: 2rem;
+}
+
+.custom-list li:last-child { border-bottom: none; padding-bottom: 0; }
+.custom-list li:first-child { padding-top: 0; }
+
+/* Chấm Bullet phát sáng như biểu đồ chứng khoán */
+.custom-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 1.6rem;
+  width: 10px; 
+  height: 10px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--accent);
+}
+
+.custom-list li:first-child::before { top: 0.35rem; }
+
+.custom-list strong { 
+  display: block; 
+  margin-bottom: 6px; 
+  color: #f8fafc; 
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+}
+
+.custom-list span { 
+  color: var(--text-muted); 
+  font-size: 0.95rem; 
+  line-height: 1.5;
+}
+
+/* --- TƯƠNG THÍCH ĐIỆN THOẠI (RESPONSIVE) --- */
+@media (max-width: 900px) {
+  .grid { 
+    grid-template-columns: 1fr; 
+  }
+  .hero { 
+    padding-top: 3rem; 
+    padding-bottom: 5rem; 
+  }
+  .hero h1 { 
+    font-size: 2.5rem; 
+  }
 }
