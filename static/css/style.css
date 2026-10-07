@@ -1,55 +1,41 @@
-:root{
-    --bg-main: #121212;
-    --bg-card: #1e1e1e;
-    --border: #333333;
-    --text: #e0e0e0;
+:root {
+--bg: #f3f7fb;
+--ink: #172033;
+--primary: #0b5cad;
+--card: #ffffff;
+--radius: 18px;
 }
-
-body{
-    background: var(--bg-main);
-    color: var(--text);
-    font-family: 'SegoeUI', system-ui, sans-serif;
-    padding-bottom: 50px;
+* { box-sizing: border-box; }
+body {
+margin: 0;
+font-family: system-ui, -apple-system,
+"Segoe UI
+", sans-serif;
+color: var(--ink);
+background: var(--bg);
+line-height: 1.6;
 }
-
-.header-title{
-    color: #4da6ff;
-    font-weight: 700;
-    margin: 20px 0 25px;
+.container { width: min(1120px, 92%); margin-inline: auto; }
+.hero { padding: 3.5rem 0 2.5rem; color: white;
+background: linear-gradient(135deg, #083b70, #0b79d0); }
+.hero h1 { margin: .25rem 0; font-size: clamp(2rem, 6vw, 4rem); }
+.eyebrow { font-weight: 800; letter-spacing: .12em; }
+.grid {
+display: grid;
+grid-template-columns: minmax(0, 2fr) minmax(240px, 1fr);
+gap: 1.25rem;
+padding-block: 1.5rem 3rem;
+align-items: start;
 }
-
-.card-custom{
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 30px;
-    box-shadow: 0 4px 12px rgbs(0,0,0,0.5);
+.card {
+background: var(--card);
+border-radius: var(--radius);
+padding: 1.25rem;
+box-shadow: 0 12px 35px rgba(15, 42, 70, .10);
 }
-
-.vide0-box{
-    background-color: #000;
-    border: 1px solid #444;
-    border-radius: 8px;
-    padding: 10px;
-    text-align: center;
+video { display: block; width: 100%; height: auto;
+border-radius: 12px; background: #000; }
+@media (max-width: 760px) {
+.grid { grid-template-columns: 1fr; }
+.hero { padding-top: 2.5rem; }
 }
-
-.video-box img{
-    max-width: 100%;
-    height: auto;
-    border-radius: 4px;
-}
-
-.table {color: var(--text) !important; } 
-table-striped > tbody > tr:nth-of-type(odd) > * {
-    background: #2a2a2a !important;
-    color: #fff !important;
-}
-.table-bordered th, .table-bordered td { border-color: #444 !important; }
-
-.badge-ceil { background: purple; color: white;}
-.badge-floor { background: #1e90ff; color: white;}
-.badge-ref { background: #ffd700; color: black;}
-.badge-up { background: #00ff00; color: black;}
-.badge-down { background: #ff3333; color: white;}
