@@ -1,28 +1,93 @@
 <!DOCTYPE html>
 <html lang="vi">
-    <head>
-        <meta charset="UTF-8">
-        <title>Báo Cáo Phân Tích & Mô Phỏng Chứng Khoán</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-        <link ref="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
-    </head>
-    <body>
-        <div class="container">
-            <h1 class="text-center header-title">BÁO CÁO PHÂN TÍCH VÀ MÔ PHỎNG GIÁ CHỨNG KHOÁN</h1>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Mô phỏng biến động giá của một mã chứng khoán bằng Python">
+    <title>Mô phỏng Giá Chứng Khoán</title>
+    
+    <!-- Gợi ý: Thêm font chữ hiện đại (như Inter) để UI đẹp hơn -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}">
+</head>
+<body>
+    <!-- Khu vực Header (Hero) -->
+    <header class="hero">
+        <div class="container text-center">
+            <span class="eyebrow tag">PHÂN TÍCH TÀI CHÍNH BẰNG PYTHON</span>
+            <h1>Mô phỏng Biến động Giá Chứng khoán</h1>
+            <p class="subtitle">Quan sát sự thay đổi, xu hướng giá và rủi ro của cổ phiếu theo thời gian dựa trên các mô hình ngẫu nhiên (Monte Carlo / Random Walk).</p>
+        </div>
+    </header>
 
-            <!--1. VIDEO ANIMATION-->
-            <div class="card-custom">
-                <h3 class="text-warning mb-3">1. VIDEO MÔ PHỎNG BIẾN ĐỘNG GIÁ THEO PHIÊN</h3>
-                <div class="video-box">
-                    <img src="{{ data.video_url }}" alt="Stock Simulation Video">
+    <!-- Khu vực Nội dung chính -->
+    <main class="container grid layout-2-cols">
+        
+        <!-- Cột 1: Video mô phỏng biểu đồ -->
+        <section class="card video-card shadow-sm" aria-labelledby="video-title">
+            <header class="card-header">
+                <h2 id="video-title" class="flex-align-center">
+                    <!-- Icon Biểu đồ -->
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path>
+                    </svg>
+                    Video / Biểu đồ Mô phỏng
+                </h2>
+            </header>
+            
+            <div class="card-body">
+                {% if video_available %}
+                <div class="video-wrapper">
+                    <video controls playsinline preload="metadata" aria-label="Video mô phỏng biến động giá cổ phiếu">
+                        <source src="{{ url_for('static', path='/video/dothi_chungkhoan.mp4') }}" type="video/mp4">
+                        Trình duyệt của bạn không hỗ trợ video HTML5. Vui lòng nâng cấp trình duyệt.
+                    </video>
                 </div>
-                <div class="mt-3 text-center">
-                    <span class="badge badge-ceil p-2">Gia Tran</span>
-                    <span class="badge badge-floor p-2">Gia San</span>
-                    <span class="badge badge-ref p-2">Tham Chieu</span>
-                    <span class="badge badge-up p-2">Xanh (tang)</span>
-                    <span class="badge badge-down p-2">Do (Giam)</span>
+                {% else %}
+                <!-- Giao diện khi thiếu video được làm đẹp hơn -->
+                <div class="video-missing alert alert-warning" role="alert">
+                    <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                    <div class="alert-content">
+                        <strong>Chưa tìm thấy dữ liệu mô phỏng</strong>
+                        <p>Vui lòng thêm file <code>dothi_chungkhoan.mp4</code> vào thư mục <code>static/video/</code> để bật phát.</p>
+                    </div>
                 </div>
+                {% endif %}
             </div>
-    </body>
+        </section>
+
+        <!-- Cột 2: Hướng dẫn quan sát (Phân tích) -->
+        <aside class="card instruction-card shadow-sm" aria-labelledby="observation-title">
+            <header class="card-header">
+                <h2 id="observation-title" class="flex-align-center">
+                    <!-- Icon Focus -->
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    Tiêu điểm Cần quan sát
+                </h2>
+            </header>
+            
+            <div class="card-body">
+                <ul class="observation-list custom-list">
+                    <li>
+                        <strong>Biến động giá (Volatility):</strong> 
+                        <span>Theo dõi biên độ dao động của giá qua từng phiên giao dịch trong các kịch bản khác nhau.</span>
+                    </li>
+                    <li>
+                        <strong>Xu hướng (Trend):</strong> 
+                        <span>Quan sát xu hướng chung, xác định các vùng hỗ trợ, kháng cự và các điểm đảo chiều tiềm năng.</span>
+                    </li>
+                    <li>
+                        <strong>Phân tích rủi ro (Risk Analysis):</strong> 
+                        <span>Đánh giá xác suất giá chạm các ngưỡng cắt lỗ (stop-loss) hoặc chốt lời (take-profit) kỳ vọng.</span>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+    </main>
+</body>
 </html>
